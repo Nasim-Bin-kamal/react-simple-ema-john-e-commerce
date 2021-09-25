@@ -38,7 +38,15 @@ const Shop = () => {
 
 
     const handleAddToCart = product => {
-        const newCart = [...cart, product];
+        const newCart = [...cart];
+        const existingProduct = cart.find(pd => pd.key === product.key);
+        if (existingProduct) {
+            product.quantity += 1;
+        }
+        else {
+            product.quantity = 1;
+            newCart.push(product);
+        }
         setCart(newCart);
         addToDb(product.key);
 
@@ -53,23 +61,25 @@ const Shop = () => {
 
 
     return (
-        <div className="container">
+        <div>
             <Navbar handleSearch={handleSearch}></Navbar>
-            <div className="row">
-                <div className="col-md-9">
-                    <h2 className="mx-3 my-4 text-primary ">Products</h2>
-                    {
-                        displayProducts.map(product => <Product
-                            key={product.key}
-                            product={product}
-                            handleAddToCart={handleAddToCart}
-                        >
-                        </Product>)
-                    }
-                </div>
-                <div className="col-md-3">
-                    <Cart cart={cart}></Cart>
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-9">
+                        <h2 className="mx-3 my-4 text-primary ">Products</h2>
+                        {
+                            displayProducts.map(product => <Product
+                                key={product.key}
+                                product={product}
+                                handleAddToCart={handleAddToCart}
+                            >
+                            </Product>)
+                        }
+                    </div>
+                    <div className="col-md-3">
+                        <Cart cart={cart}></Cart>
 
+                    </div>
                 </div>
             </div>
 

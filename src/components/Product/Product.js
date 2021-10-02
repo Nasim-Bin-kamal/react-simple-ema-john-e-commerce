@@ -5,7 +5,7 @@ import Rating from 'react-rating';
 import Feature from '../Feature/Feature';
 
 const Product = (props) => {
-    const { img, name, price, seller, stock, star, features } = props.product;
+    const { img, name, price, seller, stock, star, features } = props.product || {};
     // console.log(props.product);
     const cartIcon = <FontAwesomeIcon icon={faShoppingCart} />
     return (
@@ -35,7 +35,7 @@ const Product = (props) => {
                         <h5>Features:</h5>
                         <ul>
                             {
-                                features.map(feature => <li><Feature key={Math.random()} feature={feature}></Feature></li>)
+                                features.map(feature => <li><Feature feature={feature}></Feature></li>)
                             }
                         </ul>
                     </div>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Cart from '../Cart/Cart';
 import Product from '../Product/Product';
 import { addToDb, getStoredCart } from '../../utilities/fakedb'
-import Navbar from '../Navbar/Navbar';
+import { useHistory } from 'react-router';
 
 
 
@@ -10,6 +10,7 @@ const Shop = () => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
     const [displayProducts, setDisplayProducts] = useState([]);
+    const history = useHistory();
 
     useEffect(() => {
         fetch('./products.JSON')
@@ -38,14 +39,17 @@ const Shop = () => {
 
 
     const handleAddToCart = product => {
-        const newCart = [...cart];
-        const existingProduct = cart.find(pd => pd.key === product.key);
-        if (existingProduct) {
-            product.quantity += 1;
+        let newCart = [];
+        //find if any existing product in the cart
+        const exist = cart.find(pd => pd.key === product.key);
+        if (exist) {
+            const remaining = cart.filter(pd => pd.key !== product.key);
+            exist.quantity += 1;
+            newCart = [...remaining, product];
         }
         else {
             product.quantity = 1;
-            newCart.push(product);
+            newCart = [...cart, product];
         }
         setCart(newCart);
         addToDb(product.key);
@@ -58,11 +62,22 @@ const Shop = () => {
         setDisplayProducts(matchedProduct);
     }
 
-
+    const handleOrderReview = () => {
+        history.push("/review");
+    }
 
     return (
         <div>
-            <Navbar handleSearch={handleSearch}></Navbar>
+            <div className="bg-dark py-2">
+                <form className="d-flex w-50 mx-auto">
+                    <input
+                        onChange={handleSearch}
+                        className="form-control me-2"
+                        type="search" placeholder="Search Products"
+                        aria-label="Search" />
+                    <button className="btn btn-warning" type="submit">Search</button>
+                </form>
+            </div>
             <div className="container">
                 <div className="row">
                     <div className="col-md-9">
@@ -77,7 +92,11 @@ const Shop = () => {
                         }
                     </div>
                     <div className="col-md-3">
-                        <Cart cart={cart}></Cart>
+                        <Cart cart={cart}>
+                            <button
+                                onClick={handleOrderReview}
+                                className="btn btn-success">Order Review</button>
+                        </Cart>
 
                     </div>
                 </div>

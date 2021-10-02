@@ -1,6 +1,6 @@
 import React from 'react';
-
-const Navbar = (props) => {
+import { NavLink } from 'react-router-dom';
+const Navbar = () => {
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -11,25 +11,15 @@ const Navbar = (props) => {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <a className="nav-link active  fs-5" aria-current="page" href="/shop">Shop</a>
+                                <NavLink className="nav-link active  fs-5" aria-current="page" to="/shop">Shop</NavLink>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link fs-5" href="/order">Order Review</a>
+                                <NavLink className="nav-link fs-5" to="/review">Order Review</NavLink>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link fs-5" href="/manage">Manage Inventory</a>
+                                <NavLink className="nav-link fs-5" to="/inventory">Manage Inventory</NavLink>
                             </li>
-
-
                         </ul>
-                        <form className="d-flex flex-fill mx-5">
-                            <input
-                                onChange={props.handleSearch}
-                                className="form-control me-2"
-                                type="search" placeholder="Search Products"
-                                aria-label="Search" />
-                            <button className="btn btn-success" type="submit">Search</button>
-                        </form>
                     </div>
                 </div>
             </nav>

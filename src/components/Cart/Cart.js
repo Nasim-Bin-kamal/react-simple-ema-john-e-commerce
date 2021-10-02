@@ -17,7 +17,7 @@ const Cart = (props) => {
     const tax = totalPrice * 0.1;
     const grandTotal = totalPrice + shipping + tax;
     return (
-        <div className="mt-5 border border-3 p-3 shadow-lg rounded-3">
+        <div className="mt-5 border border-3 p-2 shadow-lg rounded-3">
             <h3 className="text-center mx-auto text-primary mb-4">Order Summary</h3>
             <h5 className="text-center mx-auto">Total Item Ordered: {totalQuantity}</h5>
             <div className="my-3 p-2">
@@ -25,6 +25,9 @@ const Cart = (props) => {
                 <p>Shipping: {shipping.toFixed(2)}</p>
                 <p>Tax: {tax.toFixed(2)} </p>
                 <h4 className="text-danger">Grand Total: {grandTotal.toFixed(2)}</h4>
+                <div className="mx-auto d-flex justify-content-center mt-4">
+                    {props.children}
+                </div>
             </div>
         </div>
     );

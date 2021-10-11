@@ -15,7 +15,7 @@ const ReviewItem = (props) => {
                         <div>
                             <p><small>Only {stock} left in stock -order soon!!</small></p>
                             <div className="btn btn btn-warning"
-                                onClick={() => handleRemoveItem(key)}><i class="fas fa-trash-alt"></i> Remove</div>
+                                onClick={() => handleRemoveItem(key)}><i className="fas fa-trash-alt"></i> Remove</div>
                         </div>
                     </div>
 

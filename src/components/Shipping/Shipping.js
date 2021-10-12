@@ -4,8 +4,10 @@ import useAuth from '../../hooks/useAuth';
 
 const Shipping = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
-    const { user } = useAuth();
+    const onSubmit = data => {
+        console.log(data)
+    };
+    const user = useAuth();
     return (
         <div>
             <div className="d">
@@ -16,10 +18,12 @@ const Shipping = () => {
                     <input className="form-control my-2 border-warning w-25" type="text" placeholder="Email" defaultValue={user?.email} {...register("Email", { required: true, pattern: /^\S+@\S+$/i })} />
                     <input className="form-control my-2 border-warning w-25" type="text" placeholder="Address" {...register("Address", {})} />
                     <input className="form-control my-2 border-warning w-25" type="tel" placeholder="Mobile number" {...register("Mobile number", { required: true, max: 11, maxLength: 11 })} />
-                    <p>{errors}</p>
+                    {errors.Email && <span className="text-danger">This field is required</span>}
+
                     <input className="btn btn-success my-3 px-3" type="submit" />
                 </form>
             </div>
+
         </div>
     );
 };

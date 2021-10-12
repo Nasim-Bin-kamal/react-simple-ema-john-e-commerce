@@ -26,6 +26,9 @@ const Navbar = () => {
                             <li className="nav-item">
                                 <NavLink className="nav-link fs-5" to="/register">Register</NavLink>
                             </li>
+                            <li className="nav-item">
+                                <NavLink className="nav-link fs-5" to="/shipping">Shipping</NavLink>
+                            </li>
                             {!user.email && <li className="nav-item">
                                 <NavLink className="nav-link fs-5" to="/login">Login</NavLink>
                             </li>}
